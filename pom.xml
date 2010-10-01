@@ -8,24 +8,57 @@
     <artifactId>rest-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
+    <repositories>
+        <repository>
+            <id>codehaus</id>
+            <url>http://repository.codehaus.org</url>
+        </repository>
+        <repository>
+            <id>cukes</id>
+            <url>http://cukes.info/maven</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>cukes</id>
+            <url>http://cukes.info/maven</url>
+        </pluginRepository>
+    </pluginRepositories>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <jersey.version>1.0.3</jersey.version>
         <jackson.version>1.5.4</jackson.version>
         <jetty.version>7.1.4.v20100610</jetty.version>
-        <cucumber.version>0.3.2</cucumber.version>
+        <cucumber.version>0.8.5</cucumber.version>
         <cucumber.color>--color</cucumber.color>
-    </properties>
+        <cuke4duke.version>0.3.2</cuke4duke.version>
 
+        <!-- Behind a proxy? -->
+        <!-- see http://wiki.github.com/aslakhellesoy/cuke4duke/installing-gems -->
+        <!--  and http://github.com/aslakhellesoy/cuke4duke/issues/issue/36 -->
+        <!--http.proxy>http://your.proxy:port</http.proxy-->
+    </properties>
     <dependencies>
-        <!-- JSR311 Jersey -->
         <dependency>
             <groupId>cuke4duke</groupId>
             <artifactId>cuke4duke</artifactId>
-            <version>0.3.2</version>
+            <version>${cuke4duke.version}</version>
+            <scope>test</scope>
         </dependency>
+        <dependency>
+             <groupId>org.picocontainer</groupId>
+             <artifactId>picocontainer</artifactId>
+             <version>2.8.3</version>
+             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.7</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- JSR311 Jersey -->
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
@@ -112,7 +145,7 @@
                 <version>${jetty.version}</version>
                 <configuration>
                     <scanIntervalSeconds/>
-                    <stopKey>foo</stopKey>
+                    <stopKey>stop</stopKey>
                     <stopPort>9999</stopPort>
                     <webAppConfig>
                         <contextPath>/</contextPath>
@@ -147,34 +180,19 @@
             <plugin>
                 <groupId>cuke4duke</groupId>
                 <artifactId>cuke4duke-maven-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.picocontainer</groupId>
-                        <artifactId>picocontainer</artifactId>
-                        <version>2.8.3</version>
-                    </dependency>
-                </dependencies>
+                <version>${cuke4duke.version}</version>
                 <configuration>
-                    <jvmArgs>
-                        <!-- Enable for debugging on spawned jetty server
-                       <jvmArg>-Xdebug</jvmArg>
-                       <jvmArg>-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=y</jvmArg>
-                        -->
-                        <jvmArg>-Dcuke4duke.objectFactory=cuke4duke.internal.jvmclass.PicoFactory</jvmArg>
-                        <jvmArg>-Xmx512m</jvmArg>
-                        <jvmArg>-XX:MaxPermSize=256m</jvmArg>
-                    </jvmArgs>
-                    <cucumberArgs>
-                        <cucumberArg>--strict</cucumberArg>
-                        <cucumberArg>--backtrace</cucumberArg>
-                        <cucumberArg>--color</cucumberArg>
-                        <cucumberArg>${cucumber.color}</cucumberArg>
-                        <cucumberArg>--require</cucumberArg>
-                        <cucumberArg>${basedir}/target/test-classes</cucumberArg>
-                    </cucumberArgs>
-                    <gems>
-                        <gem>install cuke4duke --version ${cucumber.version} --verbose</gem>
-                    </gems>
+                <jvmArgs>
+                     <jvmArg>
+                     -Dcuke4duke.objectFactory=cuke4duke.internal.jvmclass.PicoFactory
+                     </jvmArg>
+                </jvmArgs>
+                <cucumberArgs>
+                    <cucumberArg>${basedir}/src/test/java</cucumberArg>
+                </cucumberArgs>
+                <gems>
+                    <gem>install cuke4duke --version ${cuke4duke.version}</gem>
+                </gems>
                 </configuration>
                 <executions>
                     <execution>
