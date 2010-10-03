@@ -32,7 +32,7 @@
         <jetty.version>7.1.4.v20100610</jetty.version>
         <cucumber.version>0.8.5</cucumber.version>
         <cucumber.color>--color</cucumber.color>
-        <cuke4duke.version>0.3.2</cuke4duke.version>
+        <cuke4duke.version>0.3.3</cuke4duke.version>
 
         <!-- Behind a proxy? -->
         <!-- see http://wiki.github.com/aslakhellesoy/cuke4duke/installing-gems -->

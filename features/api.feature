@@ -2,7 +2,7 @@ Feature: API
   ...
 
   Scenario: Upload new XML measure
-    Given I have a valid recording:
+	Given I have a valid recording:
     """
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <measure>
