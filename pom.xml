@@ -17,6 +17,10 @@
             <id>cukes</id>
             <url>http://cukes.info/maven</url>
         </repository>
+        <repository>
+            <id>java</id>
+            <url>http://download.java.net/maven/2</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -206,7 +210,7 @@
                         <cucumberArg>${basedir}/target/test-classes</cucumberArg>
                     </cucumberArgs>
                     <gems>
-                        <gem>install cuke4duke --version ${cucumber.version} --verbose</gem>
+                        <gem>install cuke4duke --version ${cuke4duke.version} --verbose</gem>
                     </gems>
                 </configuration>
                 <executions>
