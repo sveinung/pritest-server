@@ -1,6 +1,6 @@
 package restapi.rest;
 
-import restapi.DB;
+import restapi.MongoImpl;
 import restapi.model.Measure;
 
 import javax.ws.rs.Consumes;
@@ -19,13 +19,13 @@ public class MeasureResource {
     @GET
     @Produces({"application/xml", "application/json"})
     public Measure get(@PathParam("name") String name) {
-        return DB.get(name);
+        return MongoImpl.get(name);
     }
 
     @POST
     @Consumes({"application/xml","application/json"})
     public Response post(Measure measure) {
-        DB.save(measure.getName(), measure);
+        MongoImpl.save(measure.getName(), measure);
         return Response.ok().build();
     }
 }

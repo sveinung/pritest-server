@@ -37,6 +37,7 @@
         <cucumber.version>0.8.5</cucumber.version>
         <cucumber.color>--color</cucumber.color>
         <cuke4duke.version>0.3.2</cuke4duke.version>
+        <mongodb.version>2.1</mongodb.version>
 
         <!-- Behind a proxy? -->
         <!-- see http://wiki.github.com/aslakhellesoy/cuke4duke/installing-gems -->
@@ -125,6 +126,12 @@
             <artifactId>jersey-client</artifactId>
             <version>${jersey.version}</version>
             <scope>test</scope>
+        </dependency>
+        <!-- MongoDB -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongodb.version}</version>
         </dependency>
 
     </dependencies>
