@@ -1,10 +1,11 @@
 package restapi;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class MongoImplTest {
 	
@@ -12,12 +13,12 @@ public class MongoImplTest {
 	
 	@BeforeClass
 	public static void before() throws Exception { 
-		mongoImpl = new MongoImpl("localhost", 27017, "citrus");
+		mongoImpl = new MongoImpl("localhost", 27017, "citrus_test");
 	}
 	
 	@Test
 	public void testDatabaseName() {
-		assertThat(mongoImpl.getDBName(), equalTo("citrus"));
+		assertThat(mongoImpl.getDBName(), equalTo("citrus_test"));
 	}
 	
 	@Test
