@@ -213,6 +213,20 @@
                         <cucumberArg>--backtrace</cucumberArg>
                         <cucumberArg>--color</cucumberArg>
                         <cucumberArg>${cucumber.color}</cucumberArg>
+                        <cucumberArg>--verbose</cucumberArg>
+                        <cucumberArg>--format</cucumberArg>
+                        <cucumberArg>pretty</cucumberArg>
+                        <!-- JUnit report -->
+                        <cucumberArg>--format</cucumberArg>
+                        <cucumberArg>junit</cucumberArg>
+                        <cucumberArg>--out</cucumberArg>
+                        <cucumberArg>${project.build.directory}/cucumber-reports</cucumberArg>
+                        <!-- JSON report -->
+                        <cucumberArg>--format</cucumberArg>
+                        <cucumberArg>json</cucumberArg>
+                        <cucumberArg>--out</cucumberArg>
+                        <cucumberArg>${project.build.directory}/cucumber-report.json</cucumberArg>
+
                         <cucumberArg>--require</cucumberArg>
                         <cucumberArg>${basedir}/target/test-classes</cucumberArg>
                     </cucumberArgs>
