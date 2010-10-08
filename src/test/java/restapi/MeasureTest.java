@@ -1,11 +1,11 @@
 package restapi;
 
-import org.junit.runner.RunWith;
-import restapi.model.Measure;
-import org.junit.Test;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
+import restapi.model.Measure;
 
 public class MeasureTest {
 

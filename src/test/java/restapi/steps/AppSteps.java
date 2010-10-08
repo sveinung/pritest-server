@@ -6,7 +6,7 @@ import com.sun.jersey.api.client.WebResource;
 import cuke4duke.annotation.I18n.EN.Given;
 import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
-import restapi.MongoImpl;
+import restapi.DatabaseHandler;
 import restapi.FailedCukeException;
 import restapi.model.Measure;
 
@@ -39,7 +39,7 @@ public class AppSteps {
     @Then("^the DB should contain measure with name \"([^\"]*)\"$")
     public void dbShouldContain(String name) {
 
-        Measure measure = MongoImpl.get(name);
+        Measure measure = DatabaseHandler.get(name);
         assertThat(measure, is(notNull()));
         assertThat(measure.getName(), equalTo(name));
 
