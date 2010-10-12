@@ -7,6 +7,8 @@ import restapi.model.Measure;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
 
@@ -16,6 +18,26 @@ public class MongoMeasureDAO implements MeasureDAO {
 
 	@Override
 	public Measure get(String key) {
+		DB db = null;
+		try {
+			db = MongoDBProvider.getInstance().getDB();
+			DBCollection coll = db.getCollection("measure");
+			
+			BasicDBObject query = new BasicDBObject();
+			query.put("key", key);
+			DBCursor cursor = coll.find(query);
+			
+			DBObject result = cursor.next();
+			Measure measure = new Measure((String)result.get("name"));
+			return measure;
+			
+		} catch (MongoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
