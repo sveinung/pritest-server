@@ -1,19 +1,21 @@
 package restapi.steps;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import cuke4duke.annotation.I18n.EN.Given;
-import cuke4duke.annotation.I18n.EN.Then;
-import cuke4duke.annotation.I18n.EN.When;
-import restapi.DatabaseHandler;
-import restapi.FailedCukeException;
-import restapi.model.Measure;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.notNull;
+import restapi.DAOFactory;
+import restapi.FailedCukeException;
+import restapi.MeasureDAO;
+import restapi.model.Measure;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+
+import cuke4duke.annotation.I18n.EN.Given;
+import cuke4duke.annotation.I18n.EN.Then;
+import cuke4duke.annotation.I18n.EN.When;
 
 public class AppSteps {
     private String recording;
@@ -38,8 +40,8 @@ public class AppSteps {
 
     @Then("^the DB should contain measure with name \"([^\"]*)\"$")
     public void dbShouldContain(String name) {
-
-        Measure measure = DatabaseHandler.get(name);
+    	MeasureDAO dao = DAOFactory.getDatabase().getMeasureDAO();
+        Measure measure = dao.get(name);
         assertThat(measure, is(notNull()));
         assertThat(measure.getName(), equalTo(name));
 

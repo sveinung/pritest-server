@@ -27,10 +27,11 @@ public class MongoMeasureDAO implements MeasureDAO {
 			query.put("key", key);
 			DBCursor cursor = coll.find(query);
 			
-			DBObject result = cursor.next();
-			Measure measure = new Measure((String)result.get("name"));
-			return measure;
-			
+			if (cursor.hasNext()) {
+				DBObject result = cursor.next();
+				Measure measure = new Measure((String)result.get("name"));
+				return measure;
+			}
 		} catch (MongoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,5 +65,16 @@ public class MongoMeasureDAO implements MeasureDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	@Override
+	public void delete(String key) throws MongoException, UnknownHostException {
+		DB db = MongoDBProvider.getInstance().getDB();
+		DBCollection coll = db.getCollection("measure");
+		
+		BasicDBObject removalQuery = new BasicDBObject();
+		removalQuery.put("key", key);
+		
+		coll.remove(removalQuery);
 	}
 }
