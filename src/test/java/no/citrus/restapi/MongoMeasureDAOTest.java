@@ -8,14 +8,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import no.citrus.restapi.Global;
-import no.citrus.restapi.MeasureDAO;
-import no.citrus.restapi.MongoMeasureDAO;
+import no.citrus.restapi.model.Measure;
 
 import org.junit.After;
 import org.junit.Test;
-
-import restapi.model.Measure;
 
 import com.mongodb.MongoException;
 

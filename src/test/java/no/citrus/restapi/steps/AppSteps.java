@@ -7,7 +7,7 @@ import static org.mockito.Matchers.notNull;
 import no.citrus.restapi.DAOFactory;
 import no.citrus.restapi.FailedCukeException;
 import no.citrus.restapi.MeasureDAO;
-import restapi.model.Measure;
+import no.citrus.restapi.model.Measure;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;

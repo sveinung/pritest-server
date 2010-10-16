@@ -2,7 +2,7 @@ package no.citrus.restapi;
 
 import java.net.UnknownHostException;
 
-import restapi.model.Measure;
+import no.citrus.restapi.model.Measure;
 
 import com.mongodb.MongoException;
 

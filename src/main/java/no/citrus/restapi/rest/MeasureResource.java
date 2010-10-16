@@ -10,8 +10,7 @@ import javax.ws.rs.core.Response;
 
 import no.citrus.restapi.DAOFactory;
 import no.citrus.restapi.MeasureDAO;
-
-import restapi.model.Measure;
+import no.citrus.restapi.model.Measure;
 
 
 @Path("/measure")
