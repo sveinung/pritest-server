@@ -4,9 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.notNull;
-import no.citrus.restapi.DAOFactory;
-import no.citrus.restapi.FailedCukeException;
-import no.citrus.restapi.MeasureDAO;
+import no.citrus.restapi.*;
 import no.citrus.restapi.model.Measure;
 
 import com.sun.jersey.api.client.Client;
@@ -18,35 +16,54 @@ import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
 
 public class AppSteps {
-    private String recording;
-    private ClientResponse response;
+    private String measureRecording;
+    private ClientResponse measureResponse;
+    private String changeRecording;
+    private ClientResponse changeResponse;
 
-    @Given("^I have a valid recording:$")
-    public void iHaveAvalidRecordingWithString(String string) {
-        recording = string;
+    @Given("^I have a valid measure recording:$")
+    public void iHaveAvalidMeasureRecordingWithString(String string) {
+        measureRecording = string;
     }
 
-    @When("^I POST the recording as \"([^\"]*)\" to \"([^\"]*)\"$")
-    public void postRecordingContentTypeToResource(String mime, String resource) {
+    @When("^I POST the measure recording as \"([^\"]*)\" to \"([^\"]*)\"$")
+    public void postMeasureRecordingContentTypeToResource(String mime, String resource) {
         Client client = Client.create();
         WebResource webResource = client.resource("http://localhost:8090" + resource);
-        response = webResource.type(mime).post(ClientResponse.class, recording);
+        measureResponse = webResource.type(mime).post(ClientResponse.class, measureRecording);
     }
 
     @Then("^It should return status \"([^\"]*)\".*?$")
-    public void itShouldReturnStatus(String statusCode) {
-        if (response.getStatus() != Integer.parseInt(statusCode)) throw new FailedCukeException();
+    public void itShouldReturnStatus(String statusCode) throws Exception {
+        if (measureResponse.getStatus() != Integer.parseInt(statusCode)) throw new Exception();
     }
 
     @Then("^the DB should contain measure with name \"([^\"]*)\"$")
-    public void dbShouldContain(String name) {
+    public void dbShouldContainMeasure(String name) {
     	MeasureDAO dao = DAOFactory.getDatabase().getMeasureDAO();
         Measure measure = dao.get(name);
         assertThat(measure, is(notNull()));
         assertThat(measure.getName(), equalTo(name));
-
-
     }
 
+    @Given("^I have a valid change recording:$")
+    public void iHaveAvalidChangeRecordingWithString(String string) {
+    	changeRecording = string;
+    }
 
+    @When("^I POST the change recording as \"([^\"]*)\" to \"([^\"]*)\"$")
+    public void postChangeRecordingContentTypeToResource(String mime, String resource) {
+        Client client = Client.create();
+        WebResource webResource = client.resource("http://localhost:8090" + resource);
+        changeResponse = webResource.type(mime).post(ClientResponse.class, changeRecording);
+    }
+    
+    @Then("^It should return change status \"([^\"]*)\".*?$")
+    public void itShouldReturnChangeStatus(String statusCode) throws Exception {
+        if (changeResponse.getStatus() != Integer.parseInt(statusCode)) throw new Exception();
+    }
+
+    @Then("^the DB should contain change with name \"([^\"]*)\"$")
+    public void dbShouldContainChange(String name) {
+    }
 }
