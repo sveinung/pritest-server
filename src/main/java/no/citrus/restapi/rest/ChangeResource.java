@@ -15,19 +15,20 @@ import no.citrus.restapi.model.Change;
 @Path("/change")
 public class ChangeResource {
 	
-	@Path("/{name}")
+	@Path("/{after}")
     @GET
     @Produces({"application/xml", "application/json"})
-    public Change get(@PathParam("name") String name) {
+    public Change get(@PathParam("after") String after) {
     	ChangeDAO dao = DAOFactory.getDatabase().getChangeDAO();
-    	return dao.get(name);
+    	return dao.get(after);
     }
 
     @POST
     @Consumes({"application/xml", "application/json"})
     public Response post(Change change) {
     	ChangeDAO dao = DAOFactory.getDatabase().getChangeDAO();
-    	dao.insert(change.getName(), change);
+    	dao.insert(change.getAfter(), change);
+    	System.out.println("--- " + change.toString() + " Response " + Response.ok().build().getStatus());
         return Response.ok().build();
     }
 

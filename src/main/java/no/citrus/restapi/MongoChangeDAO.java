@@ -3,7 +3,6 @@ package no.citrus.restapi;
 import java.net.UnknownHostException;
 
 import no.citrus.restapi.model.Change;
-import no.citrus.restapi.model.Measure;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -16,30 +15,32 @@ import com.mongodb.WriteResult;
 public class MongoChangeDAO implements ChangeDAO {
 
 	@Override
-	public void delete(String key) throws MongoException, UnknownHostException {
+	public void delete(String after) throws MongoException, UnknownHostException {
 		DB db = MongoDBProvider.getInstance().getDB();
 		DBCollection coll = db.getCollection("change");
 		
 		BasicDBObject removalQuery = new BasicDBObject();
-		removalQuery.put("key", key);
+		removalQuery.put("after", after);
 		
 		coll.remove(removalQuery);
 	}
 
 	@Override
-	public Change get(String key) {
+	public Change get(String after) {
 		DB db = null;
 		try {
 			db = MongoDBProvider.getInstance().getDB();
 			DBCollection coll = db.getCollection("change");
 			
 			BasicDBObject query = new BasicDBObject();
-			query.put("key", key);
+			query.put("after", after);
 			DBCursor cursor = coll.find(query);
 			
 			if (cursor.hasNext()) {
 				DBObject result = cursor.next();
-				Change change = new Change((String)result.get("name"));
+				Change change = new Change();
+				change.setAfter((String)result.get("after"));
+				change.setBefore((String)result.get("before"));
 				return change;
 			}
 		} catch (MongoException e) {
@@ -60,8 +61,9 @@ public class MongoChangeDAO implements ChangeDAO {
 			DBCollection coll = db.getCollection("change");
 			
 			BasicDBObject doc = new BasicDBObject();
-			doc.put("key", key);
-			doc.put("name", value.getName());
+//			doc.put("key", key);
+			doc.put("after", value.getAfter());
+			doc.put("before", value.getBefore());
 			
 			WriteResult wr = coll.insert(doc);
 			

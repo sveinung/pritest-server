@@ -31,7 +31,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jersey.version>1.0.3</jersey.version>
+        <jersey.version>1.4</jersey.version>
         <jackson.version>1.5.4</jackson.version>
         <jetty.version>7.1.4.v20100610</jetty.version>
         <cucumber.version>0.8.5</cucumber.version>
@@ -77,6 +77,11 @@
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-core</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
             <version>${jersey.version}</version>
         </dependency>
         <dependency>
