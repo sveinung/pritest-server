@@ -27,7 +27,7 @@ public class ChangeResource {
     @Consumes({"application/xml", "application/json"})
     public Response post(Change change) {
     	ChangeDAO dao = DAOFactory.getDatabase().getChangeDAO();
-    	dao.insert(change.getAfter(), change);
+    	dao.insert(change);
     	System.out.println("--- " + change.toString() + " Response " + Response.ok().build().getStatus());
         return Response.ok().build();
     }
