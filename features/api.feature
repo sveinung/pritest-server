@@ -25,7 +25,7 @@ Feature: API
   Scenario: Upload new JSON change
     Given I have a valid change recording:
     """
-    {
+    payload {
 	  "before": "5aef35982fb2d34e9d9d4502f6ede1072793222d",
 	  "after": "de8251ff97ee194a289832576287d6f8ad74e3d0",
 	  "commits": [
