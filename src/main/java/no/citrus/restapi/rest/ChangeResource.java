@@ -26,8 +26,9 @@ public class ChangeResource {
 
     @POST
     @Consumes({"application/xml", "application/json", "application/x-www-form-urlencoded"})
-    public Response post(String change) {
+    public Response post(@FormParam("payload") String change) {
     	System.out.println(change);
+    	
 //    	ChangeDAO dao = DAOFactory.getDatabase().getChangeDAO();
 //    	dao.insert(change);
 //    	System.out.println("--- " + change.toString() + " Response " + Response.ok().build().getStatus());
