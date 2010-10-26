@@ -1,6 +1,7 @@
 package no.citrus.restapi.rest;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,12 +25,12 @@ public class ChangeResource {
     }
 
     @POST
-    @Consumes({"application/xml", "application/json"})
-    public Response post(Change change) {
-    	ChangeDAO dao = DAOFactory.getDatabase().getChangeDAO();
-    	dao.insert(change);
-    	System.out.println("--- " + change.toString() + " Response " + Response.ok().build().getStatus());
+    @Consumes({"application/xml", "application/json", "application/x-www-form-urlencoded"})
+    public Response post(String change) {
+    	System.out.println(change);
+//    	ChangeDAO dao = DAOFactory.getDatabase().getChangeDAO();
+//    	dao.insert(change);
+//    	System.out.println("--- " + change.toString() + " Response " + Response.ok().build().getStatus());
         return Response.ok().build();
     }
-
 }
