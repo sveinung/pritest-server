@@ -4,7 +4,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.notNull;
-import no.citrus.restapi.*;
+import no.citrus.restapi.DAOFactory;
+import no.citrus.restapi.MeasureDAO;
 import no.citrus.restapi.model.Measure;
 
 import com.sun.jersey.api.client.Client;
@@ -20,6 +21,7 @@ public class AppSteps {
     private ClientResponse measureResponse;
     private String changeRecording;
     private ClientResponse changeResponse;
+    private ClientResponse testorderResponse;
 
     @Given("^I have a valid measure recording:$")
     public void iHaveAvalidMeasureRecordingWithString(String string) {
@@ -65,5 +67,25 @@ public class AppSteps {
 
     @Then("^the DB should contain change with name \"([^\"]*)\"$")
     public void dbShouldContainChange(String name) {
+    }
+    
+    @Given ("^I am about to run my tests$")
+    public void iAmAboutToRunMyTests() {
+    }
+    
+    @When ("^I GET a test order from \"([^\"]*)\"$")
+    public void iGetATestOrderFromTestorder1(String resource) {
+    	Client client = Client.create();
+    	WebResource webResource = client.resource("http://localhost:8090" + resource);
+    	testorderResponse = webResource.get(ClientResponse.class);
+    }
+    
+    @Then ("^it should return status \"([^\"]*)\" OK$")
+    public void itShouldReturnStatus200OK(String statusCode) throws Exception {
+    	if (testorderResponse.getStatus() != Integer.parseInt(statusCode)) throw new Exception();
+    }
+    
+    @Then ("^the response should be a list of test classes to run as \"([^\"]*)\"$")
+    public void theResponseShouldBeAListOfTestClassesToRunAsApplicationJSON(String arg1) {
     }
 }
