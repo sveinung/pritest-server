@@ -22,8 +22,8 @@ public class MongoMeasureDAOTest {
 	public void shouldInsertAndRetrieveMeasure() {
 		Measure m = new Measure("test");
 		MeasureDAO measureDAO = new MongoMeasureDAO();
-		measureDAO.insert("Test", m);
-		Measure result = measureDAO.get("Test");
+		measureDAO.insert(m);
+		Measure result = measureDAO.get("test");
 		
 		assertThat(m.getName(), equalTo(result.getName()));
 	}
@@ -31,8 +31,8 @@ public class MongoMeasureDAOTest {
 	public void valueShouldBeDeleted() throws MongoException, UnknownHostException{
 		Measure m = new Measure("test");
 		MeasureDAO measureDAO = new MongoMeasureDAO();
-		measureDAO.insert("Test", m);
-		measureDAO.delete("Test");
+		measureDAO.insert(m);
+		measureDAO.delete("test");
 		
 		assertThat(measureDAO.get("Test"), nullValue());
 	}

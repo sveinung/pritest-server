@@ -5,21 +5,64 @@ Feature: API
 	Given I have a valid measure recording:
     """
     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <measures>
     <measure>
-      <name>xmlRecording</name>
+      <source>no.muda.domain.KlassyTest</source>
+      <name>xmlRecording1</name>
+      <value>12</value>
+      <date>2010-10-13-12:24:22+1</date>
+      <category>testSuite</category>
+      <children>
+        <measure>
+          <source>no.muda.domain.KlassTest</source>
+          <category>testCase</category>
+          <name>shouldValidateNestedClasses</name>
+          <value>1.0012</value>
+          <date>2010-10-13-12:24:22+1</date>
+          <failed>true</failed>
+          <children></children>
+        </measure>
+        <measure>
+          <source>no.muda.domain.KlassTest</source>
+          <category>testCase</category>
+          <name>shouldValidateUnNestedClasses</name>
+          <value>1.0312</value>
+          <date>2010-10-13-12:24:21+1</date>
+          <failed>false</failed>
+          <children></children>
+        </measure>
+      </children>
     </measure>
+    <measure>
+      <source>no.muda.domain.KlassTest</source>
+      <name>xmlRecording2</name>
+      <value>12</value>
+      <date>2010-10-13-12:24:22+1</date>
+      <category>testSuite</category>
+      <children>
+        <measure>
+          <source>no.muda.domain.KlassTest</source>
+          <category>testCase</category>
+          <name>shouldValidateNestedClasses</name>
+          <value>1.0012</value>
+          <date>2010-10-13-12:24:22+1</date>
+          <failed>true</failed>
+          <children></children>
+        </measure>
+        <measure>
+          <source>no.muda.domain.KlassTest</source>
+          <category>testCase</category>
+          <name>shouldValidateUnNestedClasses</name>
+          <value>1.0312</value>
+          <date>2010-10-13-12:24:21+1</date>
+          <failed>false</failed>
+          <children></children>
+        </measure>
+      </children>
+    </measure>
+    </measures>
     """
     When I POST the measure recording as "application/xml" to "/measure"
-    Then It should return status "200" OK
-
-  Scenario: Upload new JSON measure
-    Given I have a valid measure recording:
-    """
-    {
-      "name":"jsonRecording"
-    }
-    """
-    When I POST the measure recording as "application/json" to "/measure"
     Then It should return status "200" OK
 
   Scenario: Upload new JSON change

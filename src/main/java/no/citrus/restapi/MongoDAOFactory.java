@@ -9,4 +9,11 @@ public class MongoDAOFactory extends DAOFactory {
 	public ChangeDAO getChangeDAO() {
 		return new MongoChangeDAO();
 	}
+
+	@Override
+	public TestDataDAO getTestDataDAO() {
+		return new MongoTestDataDAO();
+	}
+	
+	
 }
