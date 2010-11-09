@@ -1,6 +1,8 @@
 package no.citrus.restapi;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import no.citrus.restapi.model.TestData;
 
@@ -72,5 +74,31 @@ public class MongoTestDataDAO implements TestDataDAO {
 		removalQuery.put("source", className);
 		
 		coll.remove(removalQuery);
+	}
+
+	@Override
+	public List<TestData> getList() {
+		try {
+			DB db = MongoDBProvider.getInstance().getDB();
+			DBCollection coll = db.getCollection("testdata");
+			List<TestData> results = new ArrayList<TestData>();
+			
+			DBCursor cursor = coll.find();
+			while (cursor.hasNext()) {
+				DBObject result = cursor.next();
+				TestData testData = new TestData((String) result.get("source"), (Integer) result.get("fails"));
+				results.add(testData);
+			}
+			
+			return results;
+			
+		} catch (MongoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

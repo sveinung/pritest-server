@@ -1,6 +1,6 @@
 package no.citrus.restapi.model;
 
-public class TestData {
+public class TestData implements Comparable<TestData> {
 	private String className;
 	private int fails;
 	
@@ -22,6 +22,9 @@ public class TestData {
 	public void setFails(int fails) {
 		this.fails = fails;
 	}
-	
-	
+
+	@Override
+	public int compareTo(TestData arg) {
+		return this.fails - arg.getFails();
+	}
 }
