@@ -1,7 +1,5 @@
 package no.citrus.restapi.rest;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -11,6 +9,7 @@ import no.citrus.restapi.DAOFactory;
 import no.citrus.restapi.MeasureDAO;
 import no.citrus.restapi.TestDataDAO;
 import no.citrus.restapi.model.Measure;
+import no.citrus.restapi.model.MeasureList;
 import no.citrus.restapi.model.TestData;
 
 
@@ -18,11 +17,11 @@ import no.citrus.restapi.model.TestData;
 public class MeasureResource {
     @POST
     @Consumes({"application/xml"})
-    public Response post(List<Measure> measures) {
+    public Response post(MeasureList measures) {
     	MeasureDAO mdao = DAOFactory.getDatabase().getMeasureDAO();
     	TestDataDAO tdao = DAOFactory.getDatabase().getTestDataDAO();
     	
-    	for (Measure measure : measures) {
+    	for (Measure measure : measures.getList()) {
 	    	mdao.insert(measure);
 	    	
 	    	int numberOfFails = 0;
