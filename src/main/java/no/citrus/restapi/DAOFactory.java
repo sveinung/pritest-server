@@ -9,6 +9,8 @@ public abstract class DAOFactory {
 	
 	public abstract TestDataDAO getTestDataDAO();
 	
+	public abstract ChangeDataDAO getChangeDataDAO();
+	
 	public static DAOFactory getDatabase() {
 		switch (Global.DATABASETYPE) {
 		case Mongo:

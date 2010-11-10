@@ -19,10 +19,10 @@ public class TestOrderResource {
 	@Path("/{method}")
 	@GET
 	@Produces("application/json")
-	public List<String> get(@PathParam("method") String method) {
+	public List<String> get(@PathParam("method") int method) {
 		List<String> testClasses = new ArrayList<String>();
 		
-		switch (Integer.parseInt(method)) {
+		switch (method) {
 		case 1:
 			testClasses = method1();
 			break;

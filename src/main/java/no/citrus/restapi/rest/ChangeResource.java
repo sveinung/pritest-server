@@ -1,6 +1,7 @@
 package no.citrus.restapi.rest;
 
 import java.io.StringReader;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -13,9 +14,11 @@ import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
 
 import no.citrus.restapi.ChangeDAO;
+import no.citrus.restapi.ChangeDataDAO;
 import no.citrus.restapi.DAOFactory;
 import no.citrus.restapi.model.Author;
 import no.citrus.restapi.model.Change;
+import no.citrus.restapi.model.ChangeData;
 import no.citrus.restapi.model.Commit;
 import no.citrus.restapi.model.Owner;
 import no.citrus.restapi.model.Pusher;
@@ -44,17 +47,41 @@ public class ChangeResource {
 			JSONUnmarshaller unmarshaller = context.createJSONUnmarshaller();
 			Change change = unmarshaller.unmarshalFromJSON(new StringReader(changeString), Change.class);
 			
-			ChangeDAO dao = DAOFactory.getDatabase().getChangeDAO();
-	    	dao.insert(change);
-			
+			ChangeDAO changeDAO = DAOFactory.getDatabase().getChangeDAO();
+			changeDAO.insert(change);
+	    	
+	    	for (Commit commit : change.getCommits()) {
+	    		Date timestamp = commit.getTimestamp();
+	    		for (String added : commit.getAdded()) {
+	    			updateChangeData(timestamp, added);
+	    		}
+	    		for (String modified : commit.getModified()) {
+	    			updateChangeData(timestamp, modified);
+	    		}
+	    		for (String removed : commit.getRemoved()) {
+	    			updateChangeData(timestamp, removed);
+	    		}
+	    	}
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
         return Response.ok().build();
     }
+
+	private void updateChangeData(Date timestamp, String source) {
+		if (source.equals("")) {
+			return;
+		}
+		ChangeDataDAO cdDAO = DAOFactory.getDatabase().getChangeDataDAO();
+		ChangeData changeData = cdDAO.get(source);
+		if (changeData != null) {
+			changeData.setLastChange(timestamp);
+		} else {
+			changeData = new ChangeData(source, timestamp);
+		}
+		cdDAO.update(changeData);
+	}
 }
