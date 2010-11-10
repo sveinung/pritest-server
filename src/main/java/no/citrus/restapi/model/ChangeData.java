@@ -2,7 +2,7 @@ package no.citrus.restapi.model;
 
 import java.util.Date;
 
-public class ChangeData {
+public class ChangeData implements Comparable<ChangeData> {
 	private String source;
 	private Date lastChange;
 	
@@ -23,5 +23,10 @@ public class ChangeData {
 	}
 	public void setLastChange(Date lastChange) {
 		this.lastChange = lastChange;
+	}
+
+	@Override
+	public int compareTo(ChangeData arg) {
+		return lastChange.compareTo(arg.getLastChange());
 	}
 }

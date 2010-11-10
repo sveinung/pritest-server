@@ -73,7 +73,7 @@ public class MongoChangeDataDAO implements ChangeDataDAO {
 			query.put("source", changeData.getSource());
 			
 			BasicDBObject object = new BasicDBObject();
-			object.put("source", changeData.getSource());
+			object.put("source", processSource(changeData.getSource()));
 			object.put("lastChange", changeData.getLastChange());
 			
 			coll.update(query, object, true, false);
@@ -83,5 +83,20 @@ public class MongoChangeDataDAO implements ChangeDataDAO {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private String processSource(String source) {
+		String[] result = source.split("/");
+		String packagePath = "";
+		for (int i=4; i < result.length; i++) {
+			System.out.println("result[i] " + result[i]);
+			if (result[i].contains(".java")) {
+				packagePath += result[i].substring(0, result[i].length() - 5) + "Test.java";
+			} else {
+				packagePath += result[i] + ".";
+			}
+		}
+		System.out.println(packagePath);
+		return packagePath;
 	}
 }

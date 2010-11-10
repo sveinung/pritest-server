@@ -9,8 +9,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import no.citrus.restapi.ChangeDataDAO;
 import no.citrus.restapi.DAOFactory;
 import no.citrus.restapi.TestDataDAO;
+import no.citrus.restapi.model.ChangeData;
 import no.citrus.restapi.model.TestData;
 
 @Path("/testorder")
@@ -54,6 +56,15 @@ public class TestOrderResource {
 	}
 	
 	private List<String> method3() {
-		return null;
+		ChangeDataDAO cdDAO = DAOFactory.getDatabase().getChangeDataDAO();
+		List<ChangeData> changes = cdDAO.getList();
+		Collections.sort(changes);
+		
+		List<String> testNames = new ArrayList<String>();
+		for (ChangeData change : changes) {
+			testNames.add(change.getSource());
+		}
+		
+		return testNames;
 	}
 }
