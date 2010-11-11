@@ -32,10 +32,8 @@ public class MongoTestDataDAO implements TestDataDAO {
 				return testData;
 			}
 		} catch (MongoException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return new TestData(className, 0);
@@ -57,10 +55,8 @@ public class MongoTestDataDAO implements TestDataDAO {
 			coll.update(query, object, true, false);
 			
 		} catch (MongoException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -93,10 +89,8 @@ public class MongoTestDataDAO implements TestDataDAO {
 			return results;
 			
 		} catch (MongoException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

@@ -1,7 +1,9 @@
 package no.citrus.restapi.rest;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -11,8 +13,10 @@ import javax.ws.rs.Produces;
 
 import no.citrus.restapi.ChangeDataDAO;
 import no.citrus.restapi.DAOFactory;
+import no.citrus.restapi.MeasureDAO;
 import no.citrus.restapi.TestDataDAO;
 import no.citrus.restapi.model.ChangeData;
+import no.citrus.restapi.model.Measure;
 import no.citrus.restapi.model.TestData;
 
 @Path("/testorder")
@@ -52,7 +56,25 @@ public class TestOrderResource {
 	}
 	
 	private List<String> method2() {
-		return null;
+		MeasureDAO mDAO = DAOFactory.getDatabase().getMeasureDAO();
+		List<Measure> measures = mDAO.getList();
+		Collections.sort(measures);
+		
+		List<String> measureNamesFiltered = new ArrayList<String>();
+		for (Measure m : measures) {
+			
+			Calendar threeDaysAgo = Calendar.getInstance();
+			threeDaysAgo.add(Calendar.DATE, -3);
+			Date threeDaysAgoDate = new Date(threeDaysAgo.getTimeInMillis());
+			
+			if (m.getDate().after(threeDaysAgoDate)) {
+				if (!measureNamesFiltered.contains(m.getSource())) {
+					measureNamesFiltered.add(m.getSource());	
+				}
+			}
+		}
+		
+		return measureNamesFiltered;
 	}
 	
 	private List<String> method3() {

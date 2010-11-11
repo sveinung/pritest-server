@@ -10,7 +10,7 @@ Feature: API
       <source>no.muda.domain.Sist</source>
       <name>xmlRecording1</name>
       <value>12</value>
-      <date>2010-10-13-12:24:22+1</date>
+      <date>2010-11-08T01:28:24-08:00</date>
       <category>testSuite</category>
       <children>
         <measure>
@@ -18,7 +18,7 @@ Feature: API
           <category>testCase</category>
           <name>shouldValidateNestedClasses</name>
           <value>1.0012</value>
-          <date>2010-10-13-12:24:22+1</date>
+          <date>2010-11-08T01:28:24-08:00</date>
           <failed>true</failed>
           <children></children>
         </measure>
@@ -27,35 +27,8 @@ Feature: API
           <category>testCase</category>
           <name>shouldValidateUnNestedClasses</name>
           <value>1.0312</value>
-          <date>2010-10-13-12:24:21+1</date>
+          <date>2010-11-08T01:28:24-08:00</date>
           <failed>true</failed>
-          <children></children>
-        </measure>
-      </children>
-    </measure>
-    <measure>
-      <source>no.muda.domain.Fyrst</source>
-      <name>xmlRecording1</name>
-      <value>12</value>
-      <date>2010-10-13-12:24:22+1</date>
-      <category>testSuite</category>
-      <children>
-        <measure>
-          <source>no.muda.domain.KlassTest</source>
-          <category>testCase</category>
-          <name>shouldValidateNestedClasses</name>
-          <value>1.0012</value>
-          <date>2010-10-13-12:24:22+1</date>
-          <failed>false</failed>
-          <children></children>
-        </measure>
-        <measure>
-          <source>no.muda.domain.KlassTest</source>
-          <category>testCase</category>
-          <name>shouldValidateUnNestedClasses</name>
-          <value>1.0312</value>
-          <date>2010-10-13-12:24:21+1</date>
-          <failed>false</failed>
           <children></children>
         </measure>
       </children>
@@ -64,7 +37,7 @@ Feature: API
       <source>no.muda.domain.Midten</source>
       <name>xmlRecording2</name>
       <value>12</value>
-      <date>2010-10-13-12:24:22+1</date>
+      <date>2010-11-11T01:28:24-08:00</date>
       <category>testSuite</category>
       <children>
         <measure>
@@ -72,7 +45,7 @@ Feature: API
           <category>testCase</category>
           <name>shouldValidateNestedClasses</name>
           <value>1.0012</value>
-          <date>2010-10-13-12:24:22+1</date>
+          <date>2010-11-11T01:28:24-08:00</date>
           <failed>true</failed>
           <children></children>
         </measure>
@@ -81,7 +54,34 @@ Feature: API
           <category>testCase</category>
           <name>shouldValidateUnNestedClasses</name>
           <value>1.0312</value>
-          <date>2010-10-13-12:24:21+1</date>
+          <date>2010-11-11T01:28:24-08:00</date>
+          <failed>false</failed>
+          <children></children>
+        </measure>
+      </children>
+    </measure>
+    <measure>
+      <source>no.muda.domain.Fyrst</source>
+      <name>xmlRecording1</name>
+      <value>12</value>
+      <date>2010-11-11T01:28:24-08:00</date>
+      <category>testSuite</category>
+      <children>
+        <measure>
+          <source>no.muda.domain.KlassTest</source>
+          <category>testCase</category>
+          <name>shouldValidateNestedClasses</name>
+          <value>1.0012</value>
+          <date>2010-11-11T01:28:24-08:00</date>
+          <failed>false</failed>
+          <children></children>
+        </measure>
+        <measure>
+          <source>no.muda.domain.KlassTest</source>
+          <category>testCase</category>
+          <name>shouldValidateUnNestedClasses</name>
+          <value>1.0312</value>
+          <date>2010-11-11T01:28:24-08:00</date>
           <failed>false</failed>
           <children></children>
         </measure>
