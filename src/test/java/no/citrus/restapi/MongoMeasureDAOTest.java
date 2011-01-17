@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 import no.citrus.restapi.model.Measure;
 
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.mongodb.MongoException;
@@ -18,6 +19,7 @@ import com.mongodb.MongoException;
 
 
 public class MongoMeasureDAOTest {
+	@Ignore
 	@Test
 	public void shouldInsertAndRetrieveMeasure() {
 		Measure m = new Measure("test");
@@ -27,6 +29,7 @@ public class MongoMeasureDAOTest {
 		
 		assertThat(m.getName(), equalTo(result.getName()));
 	}
+	@Ignore
 	@Test
 	public void valueShouldBeDeleted() throws MongoException, UnknownHostException{
 		Measure m = new Measure("test");
