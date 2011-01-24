@@ -8,7 +8,7 @@ import cuke4duke.annotation.I18n.EN.Given;
 import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
 
-public class TestOrderResourceSteps {
+public class OrderResourceSteps {
 	private ClientResponse testorderResponse;
 	
 	@Given ("^I am about to run my tests$")

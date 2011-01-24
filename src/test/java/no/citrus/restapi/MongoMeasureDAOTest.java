@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import no.citrus.restapi.configuration.Configuration;
+import no.citrus.restapi.configuration.PropertiesHolder;
 import no.citrus.restapi.model.Measure;
 
 import org.junit.After;
@@ -41,7 +43,8 @@ public class MongoMeasureDAOTest {
 	}
 	@Test
 	public void shouldConnectToServer() throws UnknownHostException, IOException {
-		new Socket(Global.DB_URL, Global.DB_PORT);
+		Configuration config = new Configuration(PropertiesHolder.getInstance());
+		new Socket(config.getDatabaseURL(), config.getDatabasePort());
 	}
 	@After
 	public void after() throws MongoException, UnknownHostException {

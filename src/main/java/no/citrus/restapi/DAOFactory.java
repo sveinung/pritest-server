@@ -1,5 +1,8 @@
 package no.citrus.restapi;
 
+import no.citrus.restapi.configuration.Configuration;
+import no.citrus.restapi.configuration.PropertiesHolder;
+
 
 public abstract class DAOFactory {
 	
@@ -12,7 +15,8 @@ public abstract class DAOFactory {
 	public abstract ChangeDataDAO getChangeDataDAO();
 	
 	public static DAOFactory getDatabase() {
-		switch (Global.DATABASETYPE) {
+		Configuration config = new Configuration(PropertiesHolder.getInstance());
+		switch (config.getDatabaseType()) {
 		case Mongo:
 			return new MongoDAOFactory();
 		default:
