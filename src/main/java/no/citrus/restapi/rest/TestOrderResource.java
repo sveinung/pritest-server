@@ -37,6 +37,10 @@ public class TestOrderResource {
 			break;
 		case 3:
 			testClasses = method3();
+		case 5:
+			//Technique 5 is a hybrid of method1 and git status.
+			testClasses = method1();
+			break;
 		}
 		
 		return testClasses;
