@@ -1,16 +1,9 @@
-What?
-=====
-
-Simple POC to get you started.
 
 Requirements:
-* Java 6
-* Maven 2 (or 3)
+- Java 6
+- Maven 2 (or 3)
+- citrus-core (https://github.com/sdalatun/citrus-core)
+- mongodb
+- Technique 3 and 5 requires a post-recieve hook from github pointing to <url to running citrus-server>/change 
 
-How?
-====
-
-Build and run integration-tests<code>mvn clean verify</code>.
-Run webapp: <code>mvn jetty:run</code>.
-
-
+citrus-server is only supporting one project at a time.
