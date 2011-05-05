@@ -69,11 +69,13 @@ public class MongoChangeDataDAO implements ChangeDataDAO {
 			DB db = MongoDBProvider.getInstance().getDB();
 			DBCollection coll = db.getCollection("changedata");
 			
+			String processedSource = processSource(changeData.getSource());
+			
 			BasicDBObject query = new BasicDBObject();
-			query.put("source", changeData.getSource());
+			query.put("source", processedSource);
 			
 			BasicDBObject object = new BasicDBObject();
-			object.put("source", processSource(changeData.getSource()));
+			object.put("source", processedSource);
 			object.put("lastChange", changeData.getLastChange());
 			
 			coll.update(query, object, true, false);
@@ -88,10 +90,13 @@ public class MongoChangeDataDAO implements ChangeDataDAO {
 	private String processSource(String source) {
 		String[] result = source.split("/");
 		String packagePath = "";
-		for (int i=4; i < result.length; i++) {
+		for (int i=3; i < result.length; i++) {
 			System.out.println("result[i] " + result[i]);
-			if (result[i].contains(".java")) {
-				packagePath += result[i].substring(0, result[i].length() - 5) + "Test.java";
+			if (result[i].contains("Test.java")) {
+				packagePath += result[i].substring(0, result[i].length() - 5);
+			}
+			else if (result[i].contains(".java")) {
+				packagePath += result[i].substring(0, result[i].length() - 5) + "Test";
 			} else {
 				packagePath += result[i] + ".";
 			}

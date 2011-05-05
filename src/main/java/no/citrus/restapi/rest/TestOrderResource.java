@@ -37,6 +37,7 @@ public class TestOrderResource {
 			break;
 		case 3:
 			testClasses = method3();
+			break;
 		case 5:
 			//Technique 5 is a hybrid of method1 and git status.
 			testClasses = method1();
@@ -89,6 +90,7 @@ public class TestOrderResource {
 		List<String> testNames = new ArrayList<String>();
 		for (ChangeData change : changes) {
 			testNames.add(change.getSource());
+			System.out.println(change.getSource());
 		}
 		
 		return testNames;
