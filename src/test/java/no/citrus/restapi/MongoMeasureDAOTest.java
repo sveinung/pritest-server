@@ -23,7 +23,7 @@ import com.mongodb.MongoException;
 public class MongoMeasureDAOTest {
 	@Ignore
 	@Test
-	public void shouldInsertAndRetrieveMeasure() {
+	public void should_insert_and_retrieve_measure() {
 		Measure m = new Measure("test");
 		MeasureDAO measureDAO = new MongoMeasureDAO();
 		measureDAO.insert(m);
@@ -33,7 +33,7 @@ public class MongoMeasureDAOTest {
 	}
 	@Ignore
 	@Test
-	public void valueShouldBeDeleted() throws MongoException, UnknownHostException{
+	public void value_should_be_deleted() throws MongoException, UnknownHostException{
 		Measure m = new Measure("test");
 		MeasureDAO measureDAO = new MongoMeasureDAO();
 		measureDAO.insert(m);
@@ -42,7 +42,7 @@ public class MongoMeasureDAOTest {
 		assertThat(measureDAO.get("Test"), nullValue());
 	}
 	@Test
-	public void shouldConnectToServer() throws UnknownHostException, IOException {
+	public void should_connect_to_server() throws UnknownHostException, IOException {
 		Configuration config = new Configuration(PropertiesHolder.getInstance());
 		new Socket(config.getDatabaseURL(), config.getDatabasePort());
 	}

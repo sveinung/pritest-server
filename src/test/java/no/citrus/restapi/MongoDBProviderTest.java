@@ -15,13 +15,13 @@ import com.mongodb.MongoException;
 
 public class MongoDBProviderTest {
 	@Test
-	public void shouldReturnDBObject() throws MongoException, UnknownHostException {
+	public void should_return_db_object() throws MongoException, UnknownHostException {
 		DB db = MongoDBProvider.getInstance().getDB();
 		assertThat(db, not(equalTo(null)));
 	}
 	@Ignore
 	@Test
-	public void dbStatsShouldBeOk() throws MongoException, UnknownHostException {
+	public void db_stats_should_be_ok() throws MongoException, UnknownHostException {
 		DB db = MongoDBProvider.getInstance().getDB();
 		assertThat(db.getStats().ok(), equalTo(true));
 	}

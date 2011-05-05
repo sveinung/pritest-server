@@ -13,19 +13,19 @@ public class ChangeResourceSteps {
 	private ClientResponse changeResponse;
 	
 	@Given("^I have a valid change recording:$")
-    public void iHaveAvalidChangeRecordingWithString(String string) {
+    public void i_have_avalid_change_recording_with_string(String string) {
     	changeRecording = string;
     }
 
     @When("^I POST the change recording as \"([^\"]*)\" to \"([^\"]*)\"$")
-    public void postChangeRecordingContentTypeToResource(String mime, String resource) {
+    public void post_change_recording_content_type_to_resource(String mime, String resource) {
         Client client = Client.create();
         WebResource webResource = client.resource("http://localhost:8090" + resource);
         changeResponse = webResource.type(mime).post(ClientResponse.class, changeRecording);
     }
     
     @Then("^It should return change status \"([^\"]*)\".*?$")
-    public void itShouldReturnChangeStatus(String statusCode) throws Exception {
+    public void it_should_return_change_status(String statusCode) throws Exception {
         if (changeResponse.getStatus() != Integer.parseInt(statusCode)) throw new Exception();
     }
 }
