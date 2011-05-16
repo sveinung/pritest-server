@@ -36,7 +36,8 @@
         <jetty.version>7.1.4.v20100610</jetty.version>
         <cucumber.version>0.8.5</cucumber.version>
         <cucumber.color>--color</cucumber.color>
-        <cuke4duke.version>0.4.3</cuke4duke.version>
+        <cucumber.tags>~@SkipFeature</cucumber.tags>
+        <cuke4duke.version>0.4.4</cuke4duke.version>
         <mongodb.version>2.1</mongodb.version>
 
         <!-- Behind a proxy? -->
@@ -57,10 +58,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-             <groupId>org.picocontainer</groupId>
-             <artifactId>picocontainer</artifactId>
-             <version>2.8.3</version>
-             <scope>test</scope>
+            <groupId>org.picocontainer</groupId>
+            <artifactId>picocontainer</artifactId>
+            <version>2.8.3</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -148,7 +149,6 @@
 
 
     <build>
-        <finalName>rest-api</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -173,7 +173,7 @@
                     </webAppConfig>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>8090</port>
+                            <port>8888</port>
                         </connector>
                     </connectors>
                 </configuration>
@@ -201,12 +201,19 @@
             <plugin>
                 <groupId>cuke4duke</groupId>
                 <artifactId>cuke4duke-maven-plugin</artifactId>
+                <version>${cuke4duke.version}</version>
                 <configuration>
                     <jvmArgs>
                         <jvmArg>-Dcuke4duke.objectFactory=cuke4duke.internal.jvmclass.PicoFactory</jvmArg>
                     </jvmArgs>
-		    <cucumberArgs>
-                      <cucumberArg>${project.basedir}/target/test-classes</cucumberArg>
+                    <cucumberArgs>
+                        <cucumberArg>--strict</cucumberArg>
+                        <cucumberArg>--backtrace</cucumberArg>
+                        <cucumberArg>--tags</cucumberArg>
+                        <cucumberArg>${cucumber.tags}</cucumberArg>
+                        <cucumberArg>${cucumber.color}</cucumberArg>
+                        <cucumberArg>--require</cucumberArg>
+                        <cucumberArg>${project.basedir}/target/test-classes</cucumberArg>
                     </cucumberArgs>
                     <gems>
                         <gem>install cuke4duke --version ${cuke4duke.version} --verbose</gem>

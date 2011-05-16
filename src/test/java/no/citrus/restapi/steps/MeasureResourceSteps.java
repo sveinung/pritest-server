@@ -1,13 +1,5 @@
 package no.citrus.restapi.steps;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.notNull;
-import no.citrus.restapi.DAOFactory;
-import no.citrus.restapi.MeasureDAO;
-import no.citrus.restapi.model.Measure;
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -15,6 +7,15 @@ import com.sun.jersey.api.client.WebResource;
 import cuke4duke.annotation.I18n.EN.Given;
 import cuke4duke.annotation.I18n.EN.Then;
 import cuke4duke.annotation.I18n.EN.When;
+
+import no.citrus.restapi.DAOFactory;
+import no.citrus.restapi.MeasureDAO;
+import no.citrus.restapi.model.Measure;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.notNull;
 
 public class MeasureResourceSteps {
     private String measureRecording;
@@ -28,7 +29,7 @@ public class MeasureResourceSteps {
     @When("^I POST the measure recording as \"([^\"]*)\" to \"([^\"]*)\"$")
     public void post_measure_recording_content_type_to_resource(String mime, String resource) {
         Client client = Client.create();
-        WebResource webResource = client.resource("http://localhost:8090" + resource);
+        WebResource webResource = client.resource(WebappConstants.WEBAPP_BASEURL + resource);
         measureResponse = webResource.type(mime).post(ClientResponse.class, measureRecording);
     }
 
@@ -39,7 +40,7 @@ public class MeasureResourceSteps {
 
     @Then("^the DB should contain measure with name \"([^\"]*)\"$")
     public void db_should_contain_measure(String name) {
-    	MeasureDAO dao = DAOFactory.getDatabase().getMeasureDAO();
+        MeasureDAO dao = DAOFactory.getDatabase().getMeasureDAO();
         Measure measure = dao.get(name);
         assertThat(measure, is(notNull()));
         assertThat(measure.getName(), equalTo(name));
