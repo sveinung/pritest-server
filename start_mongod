@@ -1,0 +1,9 @@
+#!/bin/sh
+mongod_bin=`which mongod`
+
+test -x $mongod_bin || exit 1
+test -f mongod.conf || exit 1
+
+$mongod_bin run --config mongod.conf
+
+exit 0
