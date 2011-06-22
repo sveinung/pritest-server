@@ -1,31 +1,35 @@
+/**
+    This file is part of Pritest.
+
+    Pritest is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Pritest is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package no.citrus.restapi.rest;
-
-import java.io.StringReader;
-import java.util.Date;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBException;
-
-import no.citrus.restapi.ChangeDAO;
-import no.citrus.restapi.ChangeDataDAO;
-import no.citrus.restapi.DAOFactory;
-import no.citrus.restapi.model.Author;
-import no.citrus.restapi.model.Change;
-import no.citrus.restapi.model.ChangeData;
-import no.citrus.restapi.model.Commit;
-import no.citrus.restapi.model.Owner;
-import no.citrus.restapi.model.Pusher;
-import no.citrus.restapi.model.Repository;
 
 import com.sun.jersey.api.json.JSONJAXBContext;
 import com.sun.jersey.api.json.JSONUnmarshaller;
+import no.citrus.restapi.ChangeDAO;
+import no.citrus.restapi.ChangeDataDAO;
+import no.citrus.restapi.DAOFactory;
+import no.citrus.restapi.model.ChangeData;
+import no.pritest.restapi.model.*;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import javax.xml.bind.JAXBException;
+import java.io.StringReader;
+import java.util.Date;
 
 @Path("/change")
 public class ChangeResource {

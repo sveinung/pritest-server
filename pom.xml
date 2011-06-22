@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>no.citrus</groupId>
-    <artifactId>rest-api</artifactId>
+    <groupId>no.pritest</groupId>
+    <artifactId>pritest-server</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <repositories>
@@ -47,8 +47,8 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>no.citrus</groupId>
-            <artifactId>citrus-core</artifactId>
+            <groupId>no.pritest</groupId>
+            <artifactId>pritest-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

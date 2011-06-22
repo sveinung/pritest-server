@@ -1,24 +1,37 @@
+/**
+    This file is part of Pritest.
+
+    Pritest is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Pritest is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package no.citrus.restapi;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
+import com.mongodb.MongoException;
+import no.citrus.restapi.configuration.Configuration;
+import no.citrus.restapi.configuration.PropertiesHolder;
+import no.pritest.restapi.model.Measure;
+import org.junit.After;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import no.citrus.restapi.configuration.Configuration;
-import no.citrus.restapi.configuration.PropertiesHolder;
-import no.citrus.restapi.model.Measure;
-
-import org.junit.After;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import com.mongodb.MongoException;
-
-
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 public class MongoMeasureDAOTest {
 	@Ignore
