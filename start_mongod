@@ -4,6 +4,8 @@ mongod_bin=`which mongod`
 test -x $mongod_bin || exit 1
 test -f mongod.conf || exit 1
 
+test -d ./db || mkdir ./db
+
 $mongod_bin run --config mongod.conf
 
 exit 0
